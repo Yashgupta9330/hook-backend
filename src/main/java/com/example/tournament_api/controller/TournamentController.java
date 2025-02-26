@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/tournaments")
-@CrossOrigin(origins = "http://localhost:3000") // Allow requests from Next.js frontend
+@CrossOrigin(origins = "http://localhost:3000") 
 public class TournamentController {
     
     private final TournamentService tournamentService;
@@ -42,11 +43,8 @@ public class TournamentController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    @PostMapping
-    public ResponseEntity<Tournament> createTournament(@RequestBody Tournament tournament) {
-        return new ResponseEntity<>(
-            tournamentService.saveTournament(tournament), 
-            HttpStatus.CREATED
-        );
+    @PostMapping("/create")
+    public ResponseEntity<Tournament> createTournament(@RequestBody @Valid Tournament tournament) {
+        return new ResponseEntity<>(tournamentService.saveTournament(tournament), HttpStatus.CREATED);
     }
 }
