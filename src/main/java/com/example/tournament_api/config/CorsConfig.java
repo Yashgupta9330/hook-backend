@@ -14,9 +14,10 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
-        // Allow requests from multiple origins
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedOrigin("https://gamerhok.vercel.app");
+        // Add all the required origins
+        config.addAllowedOrigin("http://localhost:3000");  // Local development
+        config.addAllowedOrigin("https://hok-seven.vercel.app");  // Vercel production domain
+        config.addAllowedOrigin("https://whitecar.ddnsking.com"); // The backend domain
 
         // Allow common HTTP methods
         config.addAllowedMethod("GET");
@@ -26,6 +27,9 @@ public class CorsConfig {
         
         // Allow common headers
         config.addAllowedHeader("*");
+
+        // Allow credentials if required
+        config.setAllowCredentials(true);
         
         source.registerCorsConfiguration("/api/**", config);
         return new CorsFilter(source);

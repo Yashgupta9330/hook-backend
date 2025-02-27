@@ -11,7 +11,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/tournaments")
-@CrossOrigin(origins = {"http://localhost:3000", "https://gamerhok.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://hok-seven.vercel.app", "https://whitecar.ddnsking.com"})
 public class TournamentController {
 
     private final TournamentService tournamentService;
