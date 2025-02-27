@@ -9,40 +9,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/tournaments")
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = {"http://localhost:3000", "https://gamerhok.vercel.app"})
 public class TournamentController {
-    
+
     private final TournamentService tournamentService;
-    
+
     @Autowired
     public TournamentController(TournamentService tournamentService) {
         this.tournamentService = tournamentService;
     }
-    
+
     @GetMapping
     public ResponseEntity<List<Tournament>> getAllTournaments(
             @RequestParam(required = false) String status) {
-        
+
         if (status != null && !status.isEmpty()) {
             return new ResponseEntity<>(
                 tournamentService.getTournamentsByStatus(status), 
                 HttpStatus.OK
             );
         }
-        
+
         return new ResponseEntity<>(tournamentService.getAllTournaments(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<Tournament> getTournamentById(@PathVariable Long id) {
         return tournamentService.getTournamentById(id)
                 .map(tournament -> new ResponseEntity<>(tournament, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
     @PostMapping("/create")
     public ResponseEntity<Tournament> createTournament(@RequestBody @Valid Tournament tournament) {
         return new ResponseEntity<>(tournamentService.saveTournament(tournament), HttpStatus.CREATED);

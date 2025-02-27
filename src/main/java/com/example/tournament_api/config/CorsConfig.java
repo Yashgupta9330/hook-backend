@@ -8,15 +8,16 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class CorsConfig {
-    
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
-        // Allow requests from your frontend application
+        // Allow requests from multiple origins
         config.addAllowedOrigin("http://localhost:3000");
-        
+        config.addAllowedOrigin("https://gamerhok.vercel.app");
+
         // Allow common HTTP methods
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
