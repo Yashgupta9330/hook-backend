@@ -1,6 +1,6 @@
 # Gamerhok
 
-A web application that allows users get Tournament Information.
+A web application that allows users get Tournament Information deployed in aws ec2 this is the deployed url https://whitecar.ddnsking.com/
 
 ## Tech Stack
 - SpringBoot
